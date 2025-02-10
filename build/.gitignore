@@ -1,7 +1,15 @@
 build/
 dist/
+bin/
 .idea/
-*.iml
 .vscode/
+*.iml
 *.log
 *.class
+*.jar
+.DS_Store
+Thumbs.db
+.target/
+.gradle/
+*.war
+*.ear
