@@ -30,19 +30,19 @@ public class Calculator {
         frame = new JFrame("Calculator");
 
         // Load the image from resources and set it as the icon
-        try {
-            InputStream inputStream = getClass().getResourceAsStream("/resources/images/calculator.png");
+        try (InputStream inputStream = getClass().getResourceAsStream("/images/calculator.png")) {
             if (inputStream != null) {
-                // Create an image from the InputStream
+                // Read the image from the stream
                 Image image = ImageIO.read(inputStream);
                 frame.setIconImage(image);
+                System.out.println("Image loaded successfully.");
             } else {
                 System.out.println("Image not found.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         // Initialize the text field
         textField = new JTextField();
         textField.setFont(new Font("Arial", Font.BOLD, 24)); // Set font
