@@ -1,4 +1,6 @@
+package src.com.Calculator;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,29 +15,36 @@ public class Calculator {
     private String operator = "";
 
     public Calculator() {
+        
         try {
+            // Set the system's look and feel
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        // Initialize the main JFrame
         frame = new JFrame("Calculator");
         frame.setIconImage(new ImageIcon(getClass().getResource("/images/calculator.png")).getImage());
 
+        // Initialize the text field
         textField = new JTextField();
-        textField.setFont(new Font("Arial", Font.BOLD, 24));
-        textField.setPreferredSize(new Dimension(200, 50));
-        textField.setBackground(new Color(87, 87 , 87));
-        textField.setForeground(Color.WHITE);
-        textField.setHorizontalAlignment(JTextField.RIGHT);
-        textField.setEditable(false);
+        textField.setFont(new Font("Arial", Font.BOLD, 24)); // Set font
+        textField.setPreferredSize(new Dimension(200, 50)); 
+        textField.setBackground(new Color(87, 87 , 87)); // Background color
+        textField.setForeground(Color.WHITE); // Text color
+        textField.setHorizontalAlignment(JTextField.RIGHT); // Align text to the right
+        textField.setEditable(false); // Disable editing in the text field
 
+        // Initialize the number and operation buttons arrays
         numberButtons = new JButton[10];
         operationButtons = new JButton[4];
 
+        // Set up the frame layout and add text field to the top of the frame
         frame.setLayout(new BorderLayout());
         frame.add(textField, BorderLayout.NORTH);
 
+        // Initialize the panel where buttons will be placed in a grid
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 4));
 
@@ -58,7 +67,7 @@ public class Calculator {
             operationButtons[i].setBorderPainted(false);
         }
 
-        // Initialize other buttons (clear, backspace, percent, etc.)
+        // Initialize other buttons (equals, clear, backspace, percent, plus/minus and decimal point)
         equalsButton = new GradientButton("=", new Color(46, 182, 44), new Color(131, 212, 117));
         equalsButton.setFont(new Font("Arial", Font.BOLD, 20));
         equalsButton.setBackground(new Color(40, 222, 16));
@@ -152,6 +161,7 @@ public class Calculator {
         }
     }
 
+    // Listeners for other buttons (equals, clear, backspace, percent, plus/minus and decimal point)
     class EqualsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
