@@ -1,8 +1,11 @@
-package src.com.Calculator;
-import javax.swing.*;
+package com.Calculator;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import java.net.URL;
 
 public class Calculator {
     private JFrame frame;
@@ -15,7 +18,7 @@ public class Calculator {
     private String operator = "";
 
     public Calculator() {
-        
+
         try {
             // Set the system's look and feel
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -25,7 +28,20 @@ public class Calculator {
 
         // Initialize the main JFrame
         frame = new JFrame("Calculator");
-        frame.setIconImage(new ImageIcon(getClass().getResource("/images/calculator.png")).getImage());
+
+        // Load the image from resources and set it as the icon
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/resources/images/calculator.png");
+            if (inputStream != null) {
+                // Create an image from the InputStream
+                Image image = ImageIO.read(inputStream);
+                frame.setIconImage(image);
+            } else {
+                System.out.println("Image not found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Initialize the text field
         textField = new JTextField();
@@ -75,14 +91,12 @@ public class Calculator {
         equalsButton.addActionListener(new EqualsButtonListener());
         equalsButton.setBorderPainted(false);
 
-
         clearButton = new GradientButton("C", new Color(0, 0, 255), new Color(120, 121, 255));
         clearButton.setFont(new Font("Arial", Font.BOLD, 20));
         clearButton.setBackground(new Color(87, 87, 87));
         clearButton.setForeground(Color.WHITE);
         clearButton.addActionListener(new ClearButtonListener());
         clearButton.setBorderPainted(false);
-
 
         backspaceButton = new GradientButton("<<", new Color(255, 212, 0), new Color(255, 234, 97));
         backspaceButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -91,14 +105,12 @@ public class Calculator {
         backspaceButton.addActionListener(new BackspaceButtonListener());
         backspaceButton.setBorderPainted(false);
 
-
         percentButton = new GradientButton("%",new Color(255, 212, 0), new Color(255, 234, 97));
         percentButton.setFont(new Font("Arial", Font.BOLD, 20));
         percentButton.setBackground(new Color(168, 168, 168));
         percentButton.setForeground(Color.WHITE);
         percentButton.addActionListener(new PercentButtonListener());
         percentButton.setBorderPainted(false);
-
 
         plusMinusButton = new GradientButton("+/-", new Color(255, 212, 0), new Color(255, 234, 97));
         plusMinusButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -107,7 +119,6 @@ public class Calculator {
         plusMinusButton.addActionListener(new PlusMinusButtonListener());            
         plusMinusButton.setBorderPainted(false);
 
-
         decimalPointButton = new GradientButton(".", new Color(0, 0, 255), new Color(120, 121, 255));
         decimalPointButton.setFont(new Font("Arial", Font.BOLD, 20));
         decimalPointButton.setBackground(new Color(87, 87, 87));
@@ -115,9 +126,7 @@ public class Calculator {
         decimalPointButton.addActionListener(new DecimalPointListener());
         decimalPointButton.setBorderPainted(false);
 
-
         // Add buttons to the panel
-
         panel.add(backspaceButton);
         panel.add(plusMinusButton);
         panel.add(percentButton);
